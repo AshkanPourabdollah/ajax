@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <p>
+        <h1>this is a test for ajax</h1>
+    </p>
+
+    <form method="post">
+        {%csrf_token%}
+        <h3>Enter your name : </h3>
+        <input type="text" placeholder="name" id="name" name="name">
+        <h3>Enter your last name : </h3>
+        <input type="text" placeholder="last name" id="family" name="lastName">
+        <br/><br/>
+        <input type="button" onclick="message()" value="Send">
+    </form>
+
+    <!--this is java script-->
+    <script>
+        function message(){
+
+            var index_name = document.getElementById("name").value
+            var index_last_name = document.getElementById("family").value
+            var index_token = document.getElementsByName("csrfmiddlewaretoken")[0].value
+
+            
+            $.ajax(
+                {
+                    type:'POST',
+                    data:{name : index_name,lastName: index_last_name,csrfmiddlewaretoken:index_token},
+                    url:'/',success : function(res){
+                        alert("done !")
+                    }
+                }
+            )
+        }
+    </script>
+</body>
+</html>
